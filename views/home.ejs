@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+</head>
+<style>
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+    }
+    
+    td, th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+    }
+    
+    tr:nth-child(even) {
+      background-color: #dddddd;
+    }
+    </style>
+<body>
+    <h1>URL Shortner</h1>
+    <% if (locals.id) { %>
+        <h3>Generated Id: https://localhost:8000/shorturl/<%= id %></h3>
+      <% } %>
+  <form action="/shorturl" method="POST">
+    <label>Enter URL</label>
+    <input type="url" name="url" placeholder="http://example.com">
+    <button type="submit">Generate</button>
+  </form>
+  <div>
+   <% if (locals.urls) { %>
+    <table>
+        <thead>
+          <th>Sl No.</th>
+          <th>Redirect URL</th>
+          <th>Short Id</th>
+          <th>Visit Count</th>
+        </thead>
+       <tbody>
+        <% urls.forEach((allurls,index) => { %>
+            <tr>
+                <td><%= index+1 %></td>
+                <td><%= allurls.redirectURL %></td>
+                <td><%= allurls.shortId %></td>
+                <td><%= allurls.visitHistory.length%></td>
+              </tr>
+        <% }) %>
+   <% } %>
+</tbody>
+</table>
+  </div>
+</body>
+</html>
