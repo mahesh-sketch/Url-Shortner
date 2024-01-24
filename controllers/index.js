@@ -9,9 +9,12 @@ async function handleGenerateNewShortURL(req, res) {
       shortId: shortID,
       redirectURL: body.url,
       visitHistory: [],
+      createdBy: req.user._id,
     });
+    const urls = await DbModel.find({ createdBy: req.user._id });
     return res.render("home", {
       id: shortID,
+      urls: urls,
     });
   } catch (error) {
     res.status(400).json({ error: "url is required" });
