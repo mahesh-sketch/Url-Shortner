@@ -19,6 +19,7 @@ async function handleUserLogin(req, res) {
     return res.render("login", {
       error: "Invaild Username or Password",
     });
+
   const sessionId = uuidv4();
   authservice.setUser(sessionId, user);
   res.cookie("uid", sessionId);
